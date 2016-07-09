@@ -20,7 +20,7 @@ This pipeline describes a reproducible analysis of RNA-Seq data using R Markdown
   
 In this document, all necessary softwares and R packages are already installed in the system and all the FASTQ files are downloaded, unzipped, and saved in the input directory. In this particular example, feature is gene, species is Homo Sapiens and we consider single-end reads. The following steps are used in this pipleine to analyze the raw sequence data.   
 
-![](/opt/raid10/genomics/naim/Lincs/Example_RNASeq/pipeline_flowchart.png)
+![Steps for LINCS RNA-Seq pipeline ](/opt/raid10/genomics/naim/Lincs/Example_RNASeq/pipeline_flowchart.png)
 
 \newpage
 ### Directories and some parameters

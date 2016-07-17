@@ -8,7 +8,6 @@ header-includes:
 ---
 \addtolength{\headheight}{1.0cm} 
 \pagestyle{fancyplain} 
-\rhead{\includegraphics[height=1.2cm]{./uc_logo.png}} 
 \lhead{\includegraphics[height=1.2cm]{./ilincs_logo.png}} 
 
 [//]:#\renewcommand{\headrulewidth}{0pt} 

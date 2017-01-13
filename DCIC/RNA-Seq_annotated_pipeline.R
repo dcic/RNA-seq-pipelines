@@ -30,10 +30,10 @@
 	Hs.genome.gtf <- "/opt/ga4raid/pipeline/opt/iGenomes-2015-08-15/Homo_sapiens/UCSC/hg19/Annotation/Genes/genes.gtf"
 	
 	# Genome index file
-	Hs.genome.index <- "/opt/ga4raid/pipeline/opt/iGenomes-2014-05-28/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome"
+	Hs.genome.index <- "/opt/ga4raid/pipeline/opt/iGenomes-2015-08-15/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome"
 	
 	# Human genime reference file
-	Hs.genome.fa <- "/opt/ga4raid/pipeline/opt/iGenomes-2014-05-28/Homo_sapiens/UCSC/hg19/Sequence/WholeGenomeFasta/genome.fa"
+	Hs.genome.fa <- "/opt/ga4raid/pipeline/opt/iGenomes-2015-08-15/Homo_sapiens/UCSC/hg19/Sequence/WholeGenomeFasta/genome.fa"
 	
 	# Location of Picard which is a set of command line tools for manipulating high-throughput sequencing data and formats such as SAM/BAM.
 	picard.path="/opt/ga4raid/pipeline/opt/picard/trunk/dist/"
@@ -157,7 +157,9 @@
 	library(GenomicAlignments)
 
 	# Download refGene as a TranscriptDb(TxDb) object.
-	refGene <- makeTxDbFromUCSC(genome="hg19", tablename="refGene")
+	
+	refGene <- makeTxDbFromGFF(file=Hs.genome.gtf,format="gtf",organism="Homo sapiens")
+	#refGene <- makeTxDbFromUCSC(genome="hg19", tablename="knownGene")
 	
 	# Download exons by gene 
 	exonRangesList <- exonsBy(refGene, "gene")
@@ -185,7 +187,8 @@
 		countsTable <- cbind(countsTable,counts) 
 	}
 	colnames(countsTable) <- as.vector(sampleInfo[,2])
-	countsTable <- data.matrix(data.frame(entrez_geneID=rownames(countsTable), countsTable, stringsAsFactors=FALSE))
+	#countsTable <- data.frame(entrez_geneID=rownames(countsTable), countsTable, stringsAsFactors=FALSE)
+	countsTable <- data.frame(UCSC_geneSymbol=rownames(countsTable), countsTable, stringsAsFactors=FALSE)
 	rownames(countsTable) <- NULL
 	
 	write.table(countsTable, file=paste0(outputDirectory,"/countsTable.tsv"),quote=FALSE, sep='\t', row.names = FALSE)
